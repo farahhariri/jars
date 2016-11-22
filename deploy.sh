@@ -31,7 +31,7 @@ cd ..
 rm -rf out/**/* || exit 0
 
 # Run our compile script
-mvn clean install
+doCompile
 
 # Now let's go have some fun with the cloned repo
 cd out
@@ -46,6 +46,7 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
+echo "Travis is here :D " >> TravisLog
 git add .
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
