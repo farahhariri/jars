@@ -46,7 +46,7 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-echo "Travis is here :D " >> TravisLog
+echo "Travis is here :D " $( date --rfc-3339=seconds ) >> TravisLog
 git add .
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
