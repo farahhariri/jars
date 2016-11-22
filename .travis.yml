@@ -2,3 +2,18 @@ language: java
 jdk:
 - oraclejdk7
 - openjdk6
+
+after_success:
+  - |
+
+       $(npm bin)/set-up-ssh --key "encrypted_ebbbe34a8540_key" \
+                                    --iv "encrypted_ebbbe34a8540_iv" \
+				                                 --path-encrypted-key ".travis/github_deploy_key.enc"env:
+
+       $(npm bin)/update-branch --commands "npm run build" \
+                    --commit-message "Hey GitHub, this content is for you! [skip ci]" \
+                    --directory "dist" \
+                    --distribution-branch "gh-pages" \
+                    --source-branch "master"
+global:
+   - secure: "AXjBVLaIMJjhN5+80BX58k/ne5g3wbOneOmLHRTVGAcV9Iip7AmXwF2serJ38GKKwHumcLjXvYg7LYNRVjb7eNDtBEOyu28BfMkGUW4Qh99LUzTcYgTj+nAY/JSwzuW6b6k0ri96AzLcWB1AD7mmzOQlFM3kcNN8m0aG7yh7RuQnJzYZ1nWen0LjvK9q6zkiNRqVxBXjoRJRyqtML+lmUkO315aXIibHQyjWZUHl+BrdtGyK7sbRZCxfH8KQ9ew/1FXYZ26y0yaIPxuMN8BgjwXAQSQOVJQLh4df4vxB5yKLfghjRT+YQc0HR18KMBV7WAUBnPAtVRsfw27G77fsKxiqfja+MnlVRXqLspm3ZMjnipH/0ppvdlnbhgSsQW3aPA5D5bozCy3Ch4r3QUtePYW7vKXUmZ785rvQJCFJ6FL/TIhHZsi6YgeOBMkAHVYqzvjBNXKvDBeE++HCX9JqW2ZUyk6qK9/Bfo6pTyo/r6RGcI7ca4SNyUnWrLPj1QtfnTGGQAy5ujnwRevy9UDOvuvAsIJHJWsXx3NGRdkNinqElWV5R6mrRIdN+r4Z9QnHCkpVScYmbWm0v7UYvmaHNQIJK6Vfqws7A+34rvkGpuWOtl20+nYUj5JHshYZ3ng602E4kj1Hpo9zdsA5QIqyjDZfPtSiOo9sKUZ7VfCrzdI="
